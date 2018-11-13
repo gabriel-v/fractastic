@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -g -Wall -O3 -fopenmp
+CFLAGS = -g -Wall -O3 -fopenmp --std=c99
 LDFLAGS = -g -lm -fopenmp
 
 
