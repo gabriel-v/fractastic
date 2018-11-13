@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
 
         output_color_header(width, height);
 
-        #pragma omp parallel for schedule(dynamic, 10)
+        #pragma omp parallel for schedule(dynamic, 1)
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 x0 = x_min + col * x_step;
