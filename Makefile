@@ -6,13 +6,15 @@ LDFLAGS = -g -lm -fopenmp
 
 .PHONY: all
 
-all: clean fractastic main2
+all: clean fractastic main2 main3
 
 fractastic: ppm.o fractal.o fractastic.o
 main2: ppm.o fractal.o main2.o
+main3: ppm.o fractal.o main3.o
 
 fractastic.o: fractastic.c
 main2.o: main2.c
+main3.o: main3.c
 fractastic.c: ppm.h fractal.h
 
 ppm.o: ppm.c
