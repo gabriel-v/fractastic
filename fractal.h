@@ -15,7 +15,7 @@
  * The value that represents a point that converges for a function.
  */
 #define CONVERGE -1
-
+#define M_PI 3.14159265358979323846264338327950288
 /*
  * A struct for render configurations.
  *
@@ -35,7 +35,8 @@ typedef struct {
  * "parameters".
  */
 typedef double complex (*const complex_function)(const double complex z,
-                                                 const double complex *const parameters);
+                                                 const double complex c,
+                                                 const double complex d);
 
 /*
  * Determines whether or not a point z0 converges under iteration for a
@@ -46,7 +47,8 @@ typedef double complex (*const complex_function)(const double complex z,
  */
 int julia(complex_function f,
           const double complex z0,
-          const double complex *const parameters,
+          const double complex c,
+          const double complex d,
           const fractal_config *const fc);
 
 /*
@@ -54,9 +56,16 @@ int julia(complex_function f,
  */
 int generalized_mandelbrot(const complex_function f,
                            const double complex z0,
-                           double complex *const parameters,
-                           const int k,
+                           const double complex d,
                            const fractal_config *const fc);
+
+void durandKerner(double complex * roots, int d);
+
+int newton(const double complex z0,
+          const double complex a,
+          const double complex * roots,
+          const double complex d,
+          const fractal_config *const fc);
 
 /*
  * Returns f(z) = z^d + c evaluated at z0, where:
@@ -64,6 +73,7 @@ int generalized_mandelbrot(const complex_function f,
  *     parameters[1] = d
  */
 double complex complex_polynomial(const double complex z0,
-                                  const double complex *const parameters);
+                                  const double complex c,
+                                  const double complex d);
 
 #endif

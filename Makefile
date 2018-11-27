@@ -1,29 +1,23 @@
 CC = gcc
 
-CFLAGS = -g -Wall -O3 -fopenmp --std=c99
-LDFLAGS = -g -lm -fopenmp
+CFLAGS = -g -Wall -O3 -std=c99 
+LDFLAGS = -lm -lrt
 
-
-.PHONY: all
-
-all: clean fractastic main2 main3
-
-fractastic: ppm.o fractal.o fractastic.o
-main2: ppm.o fractal.o main2.o
-main3: ppm.o fractal.o main3.o
+fractastic: fractal.o fractastic.o
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) -fopenmp
 
 fractastic.o: fractastic.c
-main2.o: main2.c
-main3.o: main3.c
-fractastic.c: ppm.h fractal.h
-
-ppm.o: ppm.c
-ppm.c: ppm.h
+	$(CC) $(CFLAGS) -c $^ -o $@ $(LDFLAGS) -fopenmp
+fractastic.c: fractal.h
 
 fractal.o: fractal.c
+	$(CC) $(CFLAGS) -c $^ -o $@ 
 fractal.c: fractal.h
 
 .PHONY: clean
 clean:
-	rm -f *.o fractastic fractastic-omp-simple
+	rm -f *.o fractastic
+
+.PHONY: all
+	all: clean fractastic
 
